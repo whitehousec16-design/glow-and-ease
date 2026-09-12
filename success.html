@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Order Confirmed — Glow & Ease</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo">Glow<span>&</span>Ease</a>
+    <nav class="main-nav"></nav>
+    <span></span>
+  </div>
+</header>
+
+<div class="status-page">
+  <div class="box">
+    <h1>Thank you — your order is confirmed.</h1>
+    <p>A receipt was sent to your email by Stripe. We'll get this packed and on its way shortly.</p>
+    <a href="index.html" class="btn btn-primary">Continue Shopping</a>
+  </div>
+</div>
+
+<script>
+  // Clear the cart now that checkout succeeded
+  localStorage.removeItem("glowease_cart_v1");
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glow & Ease — At-Home Wellness Gadgets</title>
+<meta name="description" content="Spa-quality wellness gadgets you can use at home. Red light therapy, recovery, and rest — without the studio price tag." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo">Glow<span>&</span>Ease</a>
+    <nav class="main-nav">
+      <a href="index.html#shop">Shop</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <button class="cart-btn">Cart <span class="cart-count">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="hero-eyebrow">At-home wellness, without the studio price</span>
+      <h1>Spa night, minus<br/>the appointment.</h1>
+      <p class="lede">Four small tools for winding down, recovering, and resetting — designed for the nights you'd rather not leave the house.</p>
+      <a href="product.html?id=red-light-mask" class="btn btn-primary">Shop the Glow Mask</a>
+    </div>
+    <div class="hero-visual">
+      <img src="images/red-light-mask.svg" alt="Red light therapy mask" />
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <span>Free shipping over $50</span>
+    <span>Secure checkout via Stripe</span>
+    <span>Simple returns within 30 days</span>
+  </div>
+</div>
+
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The line-up</h2>
+      <p>Four essentials for a slower evening — pick one or build a routine.</p>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</section>
+
+<section class="section" id="about" style="background:#efe4d5;">
+  <div class="wrap" style="max-width:70ch;">
+    <h2 style="margin-bottom:16px;">Why we started here</h2>
+    <p style="opacity:0.8;">
+      Spa nights, massage appointments, and therapy-grade recovery gear got expensive
+      fast. Glow & Ease exists to bring a handful of the better at-home versions
+      together in one place — tested for comfort, not just novelty.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Glow & Ease</span>
+    <span>Questions? hello@glowease.example</span>
+  </div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close" id="cart-close">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal-amount">$0.00</span></div>
+    <button class="btn btn-primary" id="checkout-btn" disabled>Checkout</button>
+    <p class="cart-note">Shipping & taxes calculated at checkout.</p>
+  </div>
+</div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  function renderProductGrid() {
+    const grid = document.getElementById("product-grid");
+    grid.innerHTML = PRODUCTS.map(p => `
+      <a class="product-card" href="product.html?id=${p.id}">
+        <div class="thumb"><img src="${p.image}" alt="${p.name}" /></div>
+        <div class="body">
+          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ""}
+          <h3>${p.name}</h3>
+          <p class="tagline">${p.tagline}</p>
+          <div class="price-row">
+            <span class="price">${formatPrice(p.price)}</span>
+            ${p.compareAt ? `<span class="compare">${formatPrice(p.compareAt)}</span>` : ""}
+          </div>
+        </div>
+      </a>
+    `).join("");
+  }
+  renderProductGrid();
+</script>
+</body>
+</html>

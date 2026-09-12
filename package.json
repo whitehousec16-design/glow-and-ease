@@ -1,0 +1,9 @@
+{
+  "name": "glow-and-ease-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Glow & Ease — coded storefront with Stripe Checkout, deployed free on Netlify.",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}

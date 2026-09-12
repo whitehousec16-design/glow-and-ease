@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="page-title">Product — Glow & Ease</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo">Glow<span>&</span>Ease</a>
+    <nav class="main-nav">
+      <a href="index.html#shop">Shop</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <button class="cart-btn">Cart <span class="cart-count">0</span></button>
+  </div>
+</header>
+
+<div class="wrap product-detail" id="product-detail">
+  <!-- filled by JS -->
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Glow & Ease</span>
+    <span>Questions? hello@glowease.example</span>
+  </div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close" id="cart-close">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal-amount">$0.00</span></div>
+    <button class="btn btn-primary" id="checkout-btn" disabled>Checkout</button>
+    <p class="cart-note">Shipping & taxes calculated at checkout.</p>
+  </div>
+</div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+  const product = getProductById(productId) || PRODUCTS[0];
+  let selectedQty = 1;
+
+  document.getElementById("page-title").textContent = product.name + " — Glow & Ease";
+
+  function renderDetail() {
+    document.getElementById("product-detail").innerHTML = `
+      <div class="pd-image"><img src="${product.image}" alt="${product.name}" /></div>
+      <div class="pd-info">
+        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ""}
+        <h1>${product.name}</h1>
+        <p class="tagline">${product.tagline}</p>
+        <div class="pd-price">${formatPrice(product.price)}
+          ${product.compareAt ? `<span class="compare">${formatPrice(product.compareAt)}</span>` : ""}
+        </div>
+        <p class="pd-desc">${product.description}</p>
+        <ul class="pd-bullets">
+          ${product.bullets.map(b => `<li>${b}</li>`).join("")}
+        </ul>
+        <div class="qty-row">
+          <div class="qty-control">
+            <button onclick="changeQty(-1)">−</button>
+            <span id="qty-display">${selectedQty}</span>
+            <button onclick="changeQty(1)">+</button>
+          </div>
+          <button class="btn btn-primary" onclick="addSelectedToCart()">Add to Cart</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function changeQty(delta) {
+    selectedQty = Math.max(1, selectedQty + delta);
+    document.getElementById("qty-display").textContent = selectedQty;
+  }
+
+  function addSelectedToCart() {
+    addToCart(product.id, selectedQty);
+  }
+
+  renderDetail();
+</script>
+</body>
+</html>
